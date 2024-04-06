@@ -27,7 +27,7 @@ jobs:
         run: docker run -v ${{ github.workspace }}:/workspace my-vuepress-blog sh -c "pnpm install && pnpm run docs:build"
 
       - name: Copy Built Files
-        run: cp ${{ github.workspace }}/src/.vuepress/dist ./dist
+        run: cp -r ${{ github.workspace }}/src/.vuepress/dist ./dist
 
 
       # - name: Setup pnpm

@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           # if your docs needs submodules, uncomment the following line
@@ -25,6 +25,9 @@ jobs:
 
       - name: Run Docker Container
         run: docker run -v ${{ github.workspace }}:/workspace my-vuepress-blog sh -c "pnpm install && pnpm run docs:build"
+
+      - name: Copy Built Files
+        run: cp ${{ github.workspace }}/src/.vuepress/dist ./dist
 
 
       # - name: Setup pnpm
@@ -56,4 +59,4 @@ jobs:
         with:
           # Deploy Docs
           branch: gh-pages
-          folder: src/.vuepress/dist
+          folder: ./dist
